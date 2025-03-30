@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHPHTTP;
 
 abstract class Packet
@@ -53,6 +55,13 @@ abstract class Packet
             $this->headers = $headers_to_set;
         } else {
             $this->headers = $headers;
+        }
+    }
+
+    public function addHeaders(array $headers): void
+    {
+        foreach ($headers as $name => $value) {
+            $this->setHeader($name, $value);
         }
     }
 
