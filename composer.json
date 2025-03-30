@@ -1,0 +1,20 @@
+{
+    "name": "edgaralexanderfr/php-http",
+    "description": "Library intended to expand and improve PHP's HTTP capabilities.",
+    "version": "0.0.1",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edgar Alexander Franco",
+            "email": "edgaralexanderfr@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "files": [],
+        "psr-4": {
+            "PHPHTTP\\": "src/"
+        }
+    }
+}

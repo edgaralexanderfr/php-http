@@ -1,0 +1,23 @@
+{
+    "name": "edgaralexanderfr/php-http-dev",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edgar Alexander Franco",
+            "email": "edgaralexanderfr@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "edgaralexanderfr/php-http": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
+}

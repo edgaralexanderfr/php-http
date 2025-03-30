@@ -1,0 +1,8 @@
+**/.DS_Store
+/dev/**/*
+!/dev/composer.json
+/examples/composer.lock
+/examples/vendor/
+/build/**/*
+!/build/.gitkeep
+/vendor/
