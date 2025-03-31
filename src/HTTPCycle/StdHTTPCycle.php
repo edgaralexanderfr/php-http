@@ -6,6 +6,9 @@ namespace PHPHTTP\HTTPCycle;
 
 use PHPHTTP\HTTPCycleInterface;
 use PHPHTTP\Response;
+use PHPHTTP\Router;
+
+use function PHPHTTP\get_current_request;
 
 class StdHTTPCycle implements HTTPCycleInterface
 {
@@ -30,5 +33,13 @@ class StdHTTPCycle implements HTTPCycleInterface
         echo $response->getBody();
 
         die();
+    }
+
+    public function run(Router $router): void
+    {
+        $request = get_current_request();
+        $response = new Response();
+
+        $router->handle($request, $response, true);
     }
 }

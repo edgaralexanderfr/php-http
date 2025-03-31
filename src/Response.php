@@ -30,7 +30,7 @@ final class Response extends Packet
         $this->code = $code;
     }
 
-    public function send(mixed $body, int $code = 200, array $headers = []): void
+    public function send(mixed $body, int $code = 200, array $headers = []): true
     {
         $this->setCode($code);
         $this->addHeaders($headers);
@@ -44,5 +44,7 @@ final class Response extends Packet
         if ($this->http_cycle_interface) {
             $this->http_cycle_interface->sendResponse($this);
         }
+
+        return true;
     }
 }
