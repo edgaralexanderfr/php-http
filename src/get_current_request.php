@@ -12,7 +12,17 @@ function get_current_request(): Request
         return $request;
     }
 
-    $request = new Request($_SERVER['REQUEST_METHOD']);
+    $url = '';
+
+    if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
+        $url .= 'https://';
+    } else {
+        $url .= 'http://';
+    }
+
+    $url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+    $request = new Request($_SERVER['REQUEST_METHOD'], $url);
     $request->setHeaders(getallheaders(), false);
 
     $body = file_get_contents('php://input');
