@@ -19,7 +19,8 @@
     "require": {},
     "autoload": {
         "files": [
-            "src/get_current_request.php"
+            "src/get_current_request.php",
+            "src/fetch.php"
         ],
         "psr-4": {
             "PHPHTTP\\": "src/"

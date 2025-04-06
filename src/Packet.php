@@ -80,6 +80,23 @@ abstract class Packet
         $this->body = $body;
     }
 
+    public function text(): string
+    {
+        return $this->body;
+    }
+
+    /**
+     * @return \PHPTypes\Data\json|stdClass
+     */
+    public function json(?bool $associative = null, int $depth = 512, int $flags = 0): mixed
+    {
+        if (function_exists('\PHPTypes\Data\json')) {
+            return \PHPTypes\Data\json($this->body);
+        }
+
+        return json_decode($this->body, $associative, $depth, $flags);
+    }
+
     public function reset(): void
     {
         $this->headers = [];

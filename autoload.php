@@ -24,4 +24,5 @@ if (!defined('PHPHTTP')) {
     spl_autoload_register('php_http_autoload');
 
     include __DIR__ . '/src/get_current_request.php';
+    include __DIR__ . '/src/fetch.php';
 }
