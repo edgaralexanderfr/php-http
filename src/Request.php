@@ -8,11 +8,19 @@ final class Request extends Packet
 {
     private string $request_method = 'GET';
     private string $request_type = 'GET';
+    private string $url = '';
 
     public function __construct(
         string $method = 'GET',
+        string $url = '',
+        public ?HTTPRequestInterface $http_request_interface = null,
     ) {
         $this->setMethod($method);
+        $this->setURL($url);
+
+        if (!$this->http_request_interface) {
+            $this->http_request_interface = HTTPRequestFactory::getInstance();
+        }
     }
 
     public string $method {
@@ -43,5 +51,24 @@ final class Request extends Packet
 
         $this->request_method = $method_to_set;
         $this->request_type = $method_to_set;
+    }
+
+    public function getURL(): string
+    {
+        return $this->url;
+    }
+
+    public function setURL(string $url): void
+    {
+        $this->url = $url;
+    }
+
+    public function send(): ?Response
+    {
+        if ($this->http_request_interface) {
+            return $this->http_request_interface->send($this);
+        }
+
+        return null;
     }
 }

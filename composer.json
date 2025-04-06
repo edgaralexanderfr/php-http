@@ -10,6 +10,12 @@
             "email": "edgaralexanderfr@gmail.com"
         }
     ],
+    "scripts": {
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "rm phppp-log.txt && touch phppp-log.txt && tail -f phppp-log.txt"
+        ]
+    },
     "require": {},
     "autoload": {
         "files": [
