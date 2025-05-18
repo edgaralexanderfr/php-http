@@ -7,6 +7,7 @@ namespace PHPHTTP;
 final class Server
 {
     public readonly int $port;
+    public bool $async = false;
 
     /** @var Router[] */
     private array $routers = [];
@@ -24,6 +25,11 @@ final class Server
         $router->http_cycle_interface = $this->http_cycle_interface;
 
         $this->routers[] = $router;
+    }
+
+    public function async(bool $async): void
+    {
+        $this->async = $async;
     }
 
     public function listen(int $port = 80, ?callable $callback = null): void

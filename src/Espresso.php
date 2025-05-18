@@ -41,7 +41,17 @@ final class Espresso implements HTTPCycleInterface
                 continue;
             }
 
-            $this->handle($server, $client);
+            if ($server->async) {
+                $pid = pcntl_fork();
+
+                if (!$pid) {
+                    $this->handle($server, $client);
+
+                    exit(0);
+                }
+            } else {
+                $this->handle($server, $client);
+            }
         }
     }
 
