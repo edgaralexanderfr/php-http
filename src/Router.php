@@ -34,15 +34,17 @@ final class Router
         }
     }
 
-    public function handle(Request $request, Response $response, bool $ignore_paths = false): void
+    public function handle(Request $request, Response $response, bool $ignore_paths = false): bool
     {
         $type = strtolower($request->type);
 
         if (isset($this->routes[$type])) {
-            $this->runCallbacks($type, $request, $response, $ignore_paths);
+            return $this->runCallbacks($type, $request, $response, $ignore_paths);
         } else if (isset($this->routes['all'])) {
-            $this->runCallbacks('all', $request, $response, $ignore_paths);
+            return $this->runCallbacks('all', $request, $response, $ignore_paths);
         }
+
+        return false;
     }
 
     public function all(string $path, callable ...$callback): void
@@ -104,10 +106,10 @@ final class Router
         $this->routes[$method][$path] = $callback;
     }
 
-    private function runCallbacks(string $type, Request $request, Response $response, bool $ignore_paths = false): void
+    private function runCallbacks(string $type, Request $request, Response $response, bool $ignore_paths = false): bool
     {
         foreach ($this->routes[$type] as $path => $callbacks) {
-            if ($ignore_paths) {
+            if ($ignore_paths || $path == $request->path) {
                 $result = true;
                 $i = 0;
 
@@ -116,7 +118,11 @@ final class Router
 
                     $i++;
                 }
+
+                return true;
             }
         }
+
+        return false;
     }
 }

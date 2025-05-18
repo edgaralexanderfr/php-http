@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPHTTP\HTTPCycle;
 
 use PHPHTTP\HTTPCycleInterface;
+use PHPHTTP\Server;
 use PHPHTTP\Response;
 use PHPHTTP\Router;
 
@@ -42,4 +43,6 @@ class StdHTTPCycle implements HTTPCycleInterface
 
         $router->handle($request, $response, true);
     }
+
+    public function listen(Server $server, ?callable $callback): void {}
 }

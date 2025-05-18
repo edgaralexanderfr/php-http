@@ -10,6 +10,8 @@ final class Request extends Packet
     private string $request_type = 'GET';
     private string $url = '';
 
+    public string $path = '/';
+
     public function __construct(
         string $method = 'GET',
         string $url = '',

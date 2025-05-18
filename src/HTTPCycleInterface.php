@@ -9,4 +9,5 @@ interface HTTPCycleInterface
     public function getResponseHeaders(): array;
     public function sendResponse(Response $response): void;
     public function run(Router $router): void;
+    public function listen(Server $server, ?callable $callback): void;
 }
